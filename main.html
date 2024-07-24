@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffebee;
+            overflow: hidden;
+        }
+        #message {
+            font-size: 2em;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.3s ease;
+            max-width: 80%;
+            z-index: 10;
+        }
+        #message:hover {
+            transform: scale(1.1);
+        }
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0vh); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        .background-heart {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="message">Click here for cute stuff!</div>
+
+    <script>
+        const messages = [
+            "Click here for cute stuff!",
+            "Hi Israa👋",
+            "I just have a few things to say to you",
+            "First of all",
+            "I love you",
+            "I love your smile",
+            "I love your eyes",
+            "I love the way you talk",
+            "You are amazing",
+            "You are the best",
+            "You make my heart smile",
+            "You're my favorite person",
+            "You're my sunshine on a cloudy day",
+            "I'm so lucky to have you",
+            "You're the most beautiful person I know",
+            "You make every day special",
+            "You're my dream come true",
+            "You're my perfect match",
+            "I'm crazy about you"
+        ];
+        let currentIndex = 0;
+        const messageElement = document.getElementById('message');
+
+        messageElement.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % messages.length;
+            messageElement.textContent = messages[currentIndex];
+            createHearts();
+        });
+
+        function createHearts() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createHeart();
+                }, i * 200);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function floatAnimation(element) {
+            element.style.transform = `translate(${Math.random() * 10 - 5}px, ${Math.random() * 10 - 5}px)`;
+            setTimeout(() => floatAnimation(element), 50);
+        }
+
+        floatAnimation(messageElement);
+
+        // Add background hearts
+        for (let i = 0; i < 20; i++) {
+            const backgroundHeart = document.createElement('div');
+            backgroundHeart.classList.add('background-heart');
+            backgroundHeart.textContent = '❤️';
+            backgroundHeart.style.left = Math.random() * 100 + 'vw';
+            backgroundHeart.style.top = Math.random() * 100 + 'vh';
+            document.body.appendChild(backgroundHeart);
+        }
+    </script>
+</body>
+</html>
